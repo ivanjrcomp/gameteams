@@ -1,3 +1,4 @@
+import { useRoute } from "@react-navigation/native";
 import { Highlight } from "@components/Highlight";
 import { Container, Form, HeaderList, NumberOfPlayers } from "./styles";
 import { Header } from "@components/Header";
@@ -10,16 +11,23 @@ import { PlayerCard } from "@components/PlayerCard";
 import { ListEmpty } from "@components/ListEmpty";
 import { Button } from "@components/Button";
 
+type routeParams = {
+  group: string
+}
+
 export function Players() {
   const [team, setTeam] = useState('Team 1')
   const [players, setPlayers] = useState([])
+
+  const route = useRoute()
+  const { group } = route.params as routeParams
 
   return (
     <Container>
       <Header showBackButton />
 
       <Highlight
-        title="Team Name"
+        title={group}
         subtitle="Add players and divide the teams" />
 
       <Form>
